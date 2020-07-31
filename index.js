@@ -29,6 +29,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 // lo que vamos a usar en ambos extremos cuando se comuniquen el servidor con el navegador
 //   es empezar a escuchar eventos.
 // El primer evento a escuchar es cuando se conecta un nuevo cliente.
+// connection es el nombre del evento en este caso
 io.on('connection', (socket) => {
-    console.log('new connectionacion');
+    console.log('new connectionacion', socket.id);
+
+    socket.on('chat:message', data => {
+        console.log(data);
+        // io es la coneccion entera con todos los clientes. Io.sockets (o sockets) significa a todos los conectados
+        // Se le puede dar el mismo nombre de emision porque fue creado en el cliente, no en el srv
+        //   pero en el mismo servidor no se pueden crear 2 eventos con el mismo nombre
+        //   solo crear uno con el mismo nombre con el que recibis el mismo
+        sockets.emit('chat:message', data);
+    }); 
+
+    socket.on('chat:typing', data => {
+        console.log(data);
+
+        //broadcast se usa para enviar a todos menos al cliente que esta emitiendo el evento
+        sockets.broadcast('chat:message', data);
+    });
 });
