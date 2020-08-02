@@ -39,13 +39,13 @@ io.on('connection', (socket) => {
         // Se le puede dar el mismo nombre de emision porque fue creado en el cliente, no en el srv
         //   pero en el mismo servidor no se pueden crear 2 eventos con el mismo nombre
         //   solo crear uno con el mismo nombre con el que recibis el mismo
-        sockets.emit('chat:message', data);
+        socket.emit('chat:message', data);
     }); 
 
     socket.on('chat:typing', data => {
         console.log(data);
 
         //broadcast se usa para enviar a todos menos al cliente que esta emitiendo el evento
-        sockets.broadcast('chat:message', data);
+        socket.broadcast('chat:message', data);
     });
 });
