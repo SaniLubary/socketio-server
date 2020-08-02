@@ -16,20 +16,36 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+        <div id="inicio-sesion">
+            <form action="/newUser" method="POST">
+                <p>
+                    <label for="pass">User Name</label>
+                    <input type="text" name="newName" id="new-username" required>
+                </p>
+                <p>
+                    <label for="pass">Password:</label>
+                    <input type="password" name="newPass" id="new-pass" required>
+                </p>
+                <input type="submit" value="Create User" id="submit-newUser">
+            </form>
+        </div>
+        
         <h1 style="text-align: center;">
             Chat IO
         </h1>   
+        <h3 id="username" style="text-align: center;">Santi</h3>
+        
         <div id="chat-container">
             <div id="chat-window">
                 <div id="output"></div>
                 <div id="actions"></div>
             </div>
-            <input type="text" id="username" placeholder="Username">
             <input type="text" id="message" placeholder="Message">
             <button id="send">Send</button>
-        </div>     
+        </div>
+
+        <div id="users-container"></div>
         
-        <script src="" async defer></script>
         <script src="/socket.io/socket.io.js"  defer></script>
         <script src="chat.js"  defer></script>
     </body>

@@ -6,7 +6,7 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
-#chat-container {
+#chat-container, #inicio-sesion, #users-container {
     max-width: 600px;
     margin: 30px auto;
     padding: 10px;
@@ -51,4 +51,12 @@ button {
     padding: 12px 0;
     width: 100%;
     border-radius: 0 0 2px;
+}
+
+#inicio-sesion{
+    border: 1px solid rgb(226, 43, 113);
+}
+
+#users-container{
+    border: 1px solid rgb(43, 226, 202);
 }
