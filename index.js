@@ -104,6 +104,6 @@ app.post('/newUser', (req, res) =>{
     // guardar json en el archivo
     file = fs.writeFileSync('./users.json', JSON.stringify(json));
 
-    res.send('Guardado yay');
+    res.send(file);
 
 });

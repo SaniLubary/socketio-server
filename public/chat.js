@@ -1,6 +1,6 @@
 document.onload = () => {
     init();
-}
+};
 
 // io es una variable accesible cuando se lo requirio en index.html
 const socket = io();
@@ -15,20 +15,23 @@ const btn_newUser = document.querySelector('#submit-newUser');
 const newName = document.querySelector('#new-username');
 const newPass = document.querySelector('#new-pass');
 
-// lista los usuarios debajo del chat
-loadUsers();
-
 btn_newUser.addEventListener('click', () => {    
     // mandasr solocitud POST  /new
-    fetch('/new', {
+    console.log("perolaputamadreqlpario");
+    fetch('/newUser', {
         method: 'POST', 
         headers: {'Content-type': 'application/json'},
         body: JSON.stringify({name: newName, pass: newPass})
+    })
+    .then(res => res.json())
+    .then(data => {
+        showUserCreated(newName);
     });
-
-    // mostrar mensaje de error/exito
-
+    
     // actualizar lista de usuarios
+    loadUsers();
+    
+    // mostrar mensaje de error/exito
     
     
 });
@@ -44,6 +47,11 @@ function loadUsers() {
         });
         users.innerHTML = html;
     });
+}
+
+function showUserCreated(newName) {
+    const inicioSesionDiv = document.querySelector('#inicio-sesion');
+    inicioSesionDiv.innerHTML = `<p>Hello ${newName}!</p>`; 
 }
 
 btn_send.addEventListener('click', function () {
