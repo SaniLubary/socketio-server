@@ -29,6 +29,7 @@ const io = SocketIO(server);
 // path.join() sirve para unir el directorio de acuerdo al OS usado
 //   ya que win usa "/" para los directorios, y linux "\".
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 // bodyparser para que el body se parsee en formato json
 // extended:true resuelve error de body-parser deprecated
@@ -84,8 +85,7 @@ app.get('/users', (req, res) => {
 // * Create a new User
 app.post('/newUser', (req, res) =>{
     res.setHeader('Content-type', 'text/plain');
-    const name = req.body.name; 
-    const pass = req.body.pass;
+    const {name, pass} = req.body;
     
     // abrir archvo
     var file = fs.readFileSync('./users.json', 'UTF-8');
