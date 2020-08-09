@@ -84,9 +84,8 @@ app.get('/users', (req, res) => {
 // * Create a new User
 app.post('/newUser', (req, res) =>{
     res.setHeader('Content-type', 'text/plain');
-    console.log(`req body seria: ${req.body}`);
-    const name = req.body.newName; 
-    const pass = req.body.newPass;
+    const name = req.body.name; 
+    const pass = req.body.pass;
     
     // abrir archvo
     var file = fs.readFileSync('./users.json', 'UTF-8');

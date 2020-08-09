@@ -15,24 +15,23 @@ const btn_newUser = document.querySelector('#submit-newUser');
 const newName = document.querySelector('#new-username');
 const newPass = document.querySelector('#new-pass');
 
+loadUsers();
 btn_newUser.addEventListener('click', () => {    
-    // mandasr solocitud POST  /new
-    console.log("perolaputamadreqlpario");
+    // mandasr solocitud POST  /newUser
     fetch('/newUser', {
         method: 'POST', 
         headers: {'Content-type': 'application/json'},
-        body: JSON.stringify({name: newName, pass: newPass})
+        body: JSON.stringify({name: newName.value, pass: newPass.value})
     })
-    .then(res => res.json())
-    .then(data => {
-        showUserCreated(newName);
+    .then(res => {
+        if (res.ok) {
+            // mostrar mensaje de error/exito
+            showUserCreated(newName);
+        } else console.log('wut?');
+        res.json();
     });
-    
     // actualizar lista de usuarios
-    loadUsers();
-    
-    // mostrar mensaje de error/exito
-    
+    loadUsers(); 
     
 });
 
@@ -51,7 +50,7 @@ function loadUsers() {
 
 function showUserCreated(newName) {
     const inicioSesionDiv = document.querySelector('#inicio-sesion');
-    inicioSesionDiv.innerHTML = `<p>Hello ${newName}!</p>`; 
+    inicioSesionDiv.innerHTML = `<p>Hello ${newName.value}!</p>`; 
 }
 
 btn_send.addEventListener('click', function () {
