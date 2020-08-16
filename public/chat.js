@@ -7,10 +7,10 @@ const socket = io();
 
 // DOM elements
 let message = document.getElementById("message");
-let username = document.getElementById("username");
+let username = document.getElementById("username"); //TODO sacarlo de variable de session del inicio sesion
 let btn_send = document.getElementById("send");
 let output = document.getElementById("output");
-let actions = document.getElementById("actions");
+let activity = document.getElementById("chat-participants-activity");
 const btn_newUser = document.querySelector('#submit-newUser');
 const newName = document.querySelector('#new-username');
 const newPass = document.querySelector('#new-pass');
@@ -44,6 +44,7 @@ function loadUsers() {
         data.users.forEach(user => {
             html += `<div>${user.name}</div>`;
         });
+        console.log(data);
         users.innerHTML = html;
     });
 }
@@ -71,7 +72,7 @@ message.addEventListener('keypress', () => {
 //   enviada al srv por un clinete, y devuelta a este evento desde el srv
 //   para todos los clientes
 socket.on('chat:message', data => {
-    actions.innerHTML = '';
+    activity.innerHTML = '';
 
     // borrar mensaje al ser correctamente enviado
     message.value = '';
@@ -84,7 +85,7 @@ socket.on('chat:message', data => {
 
 socket.on('chat:typing', data => {
     console.log(data);
-    actions.innerHTML = `
+    activity.innerHTML = `
         <p>
             <em>${data} is typing...</em>
         </p>
