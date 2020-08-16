@@ -55,12 +55,13 @@ function showUserCreated(newName) {
 }
 
 btn_send.addEventListener('click', function () {
-    let data = {
-        username: username.innerHTML,
-        message: message.value
-    };
-
-    socket.emit('chat:message', data);
+    if ( message.value != '' ){
+        let data = {
+            username: username.innerHTML,
+            message: message.value
+        };
+        socket.emit('chat:message', data);
+    }
 });
 
 /**
