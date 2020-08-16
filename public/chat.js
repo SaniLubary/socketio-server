@@ -63,8 +63,17 @@ btn_send.addEventListener('click', function () {
     socket.emit('chat:message', data);
 });
 
-message.addEventListener('keypress', () => {
-    socket.emit('chat:typing', username.innerHTML);
+/**
+ *  Tell srv someone's typing
+ */
+message.addEventListener('keypress', (event) => {
+    // if enter, send message
+    if (event.keyCode === 13) {
+        event.preventDefault(); // idk if this is needed?
+        btn_send.click();
+    } else {
+        socket.emit('chat:typing', username.innerHTML);
+    }
 });
 
 
