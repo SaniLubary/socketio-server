@@ -44,7 +44,6 @@ function loadUsers() {
         data.users.forEach(user => {
             html += `<div>${user.name}</div>`;
         });
-        console.log(data);
         users.innerHTML = html;
     });
 }
